@@ -1,0 +1,93 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "WSj2jaJp2epEer5qSp1QnTCJuTg=",
+			"path": "github.com/ONSdigital/go-ns/common",
+			"revision": "9a019ab07591747eced407208f7eb399ee080bec",
+			"revisionTime": "2018-08-01T08:06:49Z"
+		},
+		{
+			"checksumSHA1": "Vjyl/gfY0qx2lW9te3Ieb5HV3/s=",
+			"path": "github.com/ONSdigital/go-ns/handlers/requestID",
+			"revision": "9a019ab07591747eced407208f7eb399ee080bec",
+			"revisionTime": "2018-08-01T08:06:49Z"
+		},
+		{
+			"checksumSHA1": "g9flYl+PBs6cYflFY3EpG6IcJGM=",
+			"path": "github.com/ONSdigital/go-ns/log",
+			"revision": "9a019ab07591747eced407208f7eb399ee080bec",
+			"revisionTime": "2018-08-01T08:06:49Z"
+		},
+		{
+			"checksumSHA1": "GQdzMpAMb42KQQ/GsJFSRU5dj1Y=",
+			"path": "github.com/ONSdigital/go-ns/server",
+			"revision": "9a019ab07591747eced407208f7eb399ee080bec",
+			"revisionTime": "2018-08-01T08:06:49Z"
+		},
+		{
+			"checksumSHA1": "C0PrqJwZS9A+Izfrk+YlZQJFsvg=",
+			"path": "github.com/globalsign/mgo",
+			"revision": "0d9d58e415022cd6841752cfea1e0f8175584425",
+			"revisionTime": "2018-05-22T09:37:14Z"
+		},
+		{
+			"checksumSHA1": "6070Ot/n8eAtJPtejV9SovspdJU=",
+			"path": "github.com/globalsign/mgo/bson",
+			"revision": "0d9d58e415022cd6841752cfea1e0f8175584425",
+			"revisionTime": "2018-05-22T09:37:14Z"
+		},
+		{
+			"checksumSHA1": "//bXQG4HblBwxHJDIW/PklXAxu0=",
+			"path": "github.com/globalsign/mgo/internal/json",
+			"revision": "0d9d58e415022cd6841752cfea1e0f8175584425",
+			"revisionTime": "2018-05-22T09:37:14Z"
+		},
+		{
+			"checksumSHA1": "loubUcDO2QAStKIlVd7DqSeoEaw=",
+			"path": "github.com/globalsign/mgo/internal/sasl",
+			"revision": "0d9d58e415022cd6841752cfea1e0f8175584425",
+			"revisionTime": "2018-05-22T09:37:14Z"
+		},
+		{
+			"checksumSHA1": "xjfEsfN7ho6dDOVeUQJhW4KzD2I=",
+			"path": "github.com/globalsign/mgo/internal/scram",
+			"revision": "0d9d58e415022cd6841752cfea1e0f8175584425",
+			"revisionTime": "2018-05-22T09:37:14Z"
+		},
+		{
+			"checksumSHA1": "g/V4qrXjUGG9B+e3hB+4NAYJ5Gs=",
+			"path": "github.com/gorilla/context",
+			"revision": "08b5f424b9271eedf6f9f0ce86cb9396ed337a42",
+			"revisionTime": "2016-08-17T18:46:32Z"
+		},
+		{
+			"checksumSHA1": "Aw8z8w/d+EFt8XCUYPjzSe0bPrU=",
+			"path": "github.com/gorilla/mux",
+			"revision": "cb4698366aa625048f3b815af6a0dea8aef9280a",
+			"revisionTime": "2018-06-05T21:15:56Z"
+		},
+		{
+			"checksumSHA1": "OBvAHqWjdI4NQVAqTkcQAdTuCFY=",
+			"origin": "github.com/ONSdigital/go-ns/vendor/github.com/justinas/alice",
+			"path": "github.com/justinas/alice",
+			"revision": "9a019ab07591747eced407208f7eb399ee080bec",
+			"revisionTime": "2018-08-01T08:06:49Z"
+		},
+		{
+			"checksumSHA1": "Jrjxy16tD9mUgr/jbhXwbHVeSa0=",
+			"path": "github.com/kelseyhightower/envconfig",
+			"revision": "462fda1f11d8cad3660e52737b8beefd27acfb3f",
+			"revisionTime": "2017-09-18T16:15:10Z"
+		},
+		{
+			"checksumSHA1": "hBgLmZ/4mCxmnH88mqFKBkpJFUY=",
+			"origin": "github.com/ONSdigital/go-ns/vendor/github.com/mgutz/ansi",
+			"path": "github.com/mgutz/ansi",
+			"revision": "9a019ab07591747eced407208f7eb399ee080bec",
+			"revisionTime": "2018-08-01T08:06:49Z"
+		}
+	],
+	"rootPath": "github.com/time-sheet"
+}

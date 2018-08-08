@@ -1,0 +1,491 @@
+openapi: 3.0.0
+info:
+  title: Time Sheets API
+  description: "API provides access to updating and retrieving timesheets"
+  version: 1.0.0
+  license:
+    name: ""
+    url: ""
+paths:
+  /assignments:
+    get:
+      summary: "Returns a list of all assignments"
+      responses:
+        200:
+          description: "Returns a list of all assignments thus far"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/assignments"
+        500:
+          $ref: '#/responses/InternalError'
+  /assignments/{assignment}:
+    get:
+      summary: "Retrieve figures for that assignment, how many hours up or down"
+      parameters:
+        - in: path
+          name: assignment
+          schema:
+            type: string
+          required: true
+          description: "The assignment in which statistics are gathered on timesheets"
+      responses:
+        200:
+          description: "Returns todays timesheet thus far"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/assignment"
+        500:
+          $ref: '#/responses/InternalError'
+  /clock-in:
+    post:
+      summary: "Creates/Updates todays timesheet"
+      description: "Creates a resource for today if one doesn't already exist"
+      responses:
+        200:
+          description: "Returns todays timesheet thus far"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/time-sheet"
+        400:
+          $ref: '#/responses/InvalidRequestError'
+        409:
+          $ref: '#/responses/ConflictError'
+        500:
+          $ref: '#/responses/InternalError'
+  /clock-out:
+    post:
+      summary: "Updates todays timesheet"
+      responses:
+        200:
+          description: "Returns todays timesheet thus far"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/time-sheet"
+        400:
+          $ref: '#/responses/InvalidRequestError'
+        404:
+          $ref: '#/responses/ResourceNotFound'
+        409:
+          $ref: '#/responses/ConflictError'
+        500:
+          $ref: '#/responses/InternalError'
+  /years:
+    get:
+      summary: "Retrieves a list of all years that have timesheet records"
+      responses:
+        200:
+          description: "Returns a list of all the years in which a timesheet has been recorded"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/years"
+        500:
+          $ref: '#/responses/InternalError'
+  /years/{year}:
+    get:
+      summary: "Retrieve figures for that year, how many hours up or down"
+      parameters:
+        - in: path
+          name: year
+          schema:
+            type: integer
+          required: true
+          description: "The year in which statistics are gathered on timesheets for that year"
+      responses:
+        200:
+          description: "Returns statistics regarding that years timesheets"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/year-statistics"
+        404:
+          $ref: '#/responses/ResourceNotFound'
+        500:
+          $ref: '#/responses/InternalError'
+  /years/{year}/months:
+    get:
+      summary: "Retrieves a list of all months for a particular year that have timesheet records"
+      parameters:
+        - in: path
+          name: year
+          schema:
+            type: integer
+          required: true
+          description: "The year in which a list of months containing timesheets is returned"
+      responses:
+        200:
+          description: "Returns a list of all the months for a particular year in which a timesheet has been recorded"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/months"
+        404:
+          $ref: '#/responses/ResourceNotFound'
+        500:
+          $ref: '#/responses/InternalError'
+  /years/{year}/months/{month}:
+    get:
+      summary: "Retrieve figures for that year, how many hours up or down"
+      parameters:
+        - in: path
+          name: year
+          schema:
+            type: integer
+          required: true
+          description: "The year in which statistics are gathered on timesheets for that month of a particular year"
+        - in: path
+          name: month
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 12
+          required: true
+          description: "The month in which statistics are gathered on timesheets for that month of a particular year"
+      responses:
+        200:
+          description: "Returns statistics regarding that years timesheets"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/month-statistics"
+        404:
+          $ref: '#/responses/ResourceNotFound'
+        500:
+          $ref: '#/responses/InternalError'
+  /years/{year}/months/{month}/days:
+    get:
+      summary: "Retrieves a list of all days for a particular month of a year that have timesheet records"
+      parameters:
+        - in: path
+          name: year
+          schema:
+            type: integer
+          required: true
+          description: "The year in which a list of days of a particular month containing timesheets is returned"
+        - in: path
+          name: month
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 12
+          required: true
+          description: "The month in which a list of days of a particular year containing timesheets is returned"
+      responses:
+        200:
+          description: "Returns a list of all the days for a particular month of a particular year in which a timesheet has been recorded"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/days"
+        404:
+          $ref: '#/responses/ResourceNotFound'
+        500:
+          $ref: '#/responses/InternalError'
+  /years/{year}/months/{month}/days/{day}:
+    get:
+      summary: "Retrieves the timesheet for that particular day"
+      parameters:
+        - in: path
+          name: year
+          schema:
+            type: integer
+          required: true
+          description: "The year in which this resource is represented"
+        - in: path
+          name: month
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 12
+          required: true
+          description: "The month in which this resource is represented"
+        - in: path
+          name: day
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 31
+          required: true
+          description: "The day in which this resource is represented"
+      responses:
+        200:
+          description: "Returns todays timesheet thus far"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/time-sheet"
+        404:
+          $ref: '#/responses/ResourceNotFound'
+        500:
+          $ref: '#/responses/InternalError'
+  /years/{year}/months/{month}/days/{day}/assignment/{assignment}:
+    post:
+      summary: "Creates a timsheet for that day of the year with an empty time object"
+      parameters:
+        - in: path
+          name: year
+          schema:
+            type: integer
+          required: true
+          description: "The year in which this resource is represented"
+        - in: path
+          name: month
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 12
+          required: true
+          description: "The month in which this resource is represented"
+        - in: path
+          name: day
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 31
+          required: true
+          description: "The day in which this resource is represented"
+        - in: path
+          name: assignment
+          schema:
+            type: string
+          required: true
+          description: "The assignment this day represents (e.g. annual leave, training"
+      requestBody:
+        description: "Contains extra information to be stored, not required"
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/note'
+      responses:
+        200:
+          description: "Returns todays timesheet thus far"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/time-sheet-without-time-object'
+        409:
+          $ref: '#/responses/ConflictError'
+        500:
+          $ref: '#/responses/InternalError'
+components:
+  schemas:
+    assignments:
+      type: object
+      properties:
+        items:
+          description: ""
+          type: array
+          items:
+            type: object
+            properties:
+              assignment:
+                description: ""
+                type: string
+              hours_up:
+                description: ""
+                type: number
+    assignment:
+      type: object
+      properties:
+        assignment:
+          description: ""
+          type: string
+        hours_up:
+          description: ""
+          type: number
+        statistics:
+          description: ""
+          type: array
+          items:
+            type: object
+            properties:
+              year:
+                description: ""
+                type: integer
+              hours_up:
+                description: ""
+                type: number
+              months:
+                description: ""
+                type: array
+                items:
+                  type: object
+                  properties:
+                    month:
+                      description: ""
+                      type: integer
+                    hours_up:
+                      description: ""
+                      type: number
+    note:
+      type: object
+      properties:
+        note:
+          description: "Anything extra to add regarding this day"
+          type: string
+    time-sheet:
+      allOf:
+        - $ref: '#/components/schemas/time-sheet-without-time-object'
+      properties:
+        time:
+          description: "An array of objects containing a start and end object"
+          type: array
+          items:
+            type: object
+            properties:
+              start:
+                $ref: '#/components/schemas/time-object'
+              end:
+                $ref: '#/components/schemas/time-object'
+    time-sheet-without-time-object:
+      type: object
+      properties:
+        assignment:
+          description: "The assignment or project this resource is represented by (paid for)"
+          type: string
+        completed_hours:
+          description: "The number of hours completed thus far, this may be a non-integer number"
+          type: number
+        expected_hours:
+          description: "The number of hours expected to have included in 1 day, this may be a non-integer number"
+          type: number
+        id:
+          description: "A compound index to uniquely identify the resource"
+          type: object
+          properties:
+            day:
+              description: "The day in which hours were recorded"
+              type: integer
+              minimum: 1
+              maximum: 31
+            month:
+              description: "The month in which hours were recorded"
+              type: integer
+              minimum: 1
+              maximum: 12
+            year:
+              description: "The year in which hours were recorded"
+              type: integer
+        last_updated:
+          description: "A timestamp against the resource for when it was last updated"
+        note:
+          description: "Anything extra to add regarding this day"
+          type: string
+    time-object:
+      description: "Contains the hour, minute and nearest second in the day in which the user clocked-in or clocked-out"
+      type: object
+      properties:
+        hour:
+          description: "The hour in which timestamp was recorded, this is from 0 to 23"
+          type: integer
+          minimum: 0
+          maximum: 23
+        minute:
+          description: "The minute in which timestamp was recorded, this is from 0 to 59"
+          type: integer
+          minimum: 0
+          maximum: 59
+        second:
+          description: "The second in which timestamp was recorded, this is from 0 to 59, to the closest second"
+          type: integer
+          minimum: 0
+          maximum: 59
+    years:
+      description: ""
+      type: object
+      properties:
+        years:
+          description: ""
+          type: array
+          items:
+            type: integer
+    year-statistics:
+      description: ""
+      type: object
+      properties:
+        year:
+          description: ""
+          type: integer
+        hours_up:
+          description: ""
+          type: number
+        months:
+          description: ""
+          type: array
+          items:
+            type: object
+            properties:
+              month:
+                description: ""
+                type: integer
+                minimum: 1
+                maximum: 12
+              hours_up:
+                description: ""
+                type: string
+    months:
+      description: ""
+      type: object
+      properties:
+        year:
+          description: ""
+          type: integer
+        months:
+          description: ""
+          type: array
+          items:
+            type: integer
+            minimum: 1
+            maximum: 12
+    month-statistics:
+      description: ""
+      type: object
+      properties:
+        year:
+          description: ""
+          type: integer
+        hours_up:
+          description: ""
+          type: number
+        month:
+          description: ""
+          type: integer
+          minimum: 1
+          maximum: 12
+    days:
+      description: ""
+      type: object
+      properties:
+        year:
+          description: ""
+          type: integer
+        month:
+          description: ""
+          type: integer
+          minimum: 1
+          maximum: 12
+        days:
+          description: ""
+          type: array
+          items:
+            type: integer
+            minimum: 1
+            maximum: 31
+responses:
+  ConflictError:
+    description: "Failed to process the request due to a conflict"
+  ForbiddenError:
+    description: "The request is forbidden"
+  InternalError:
+    description: "Failed to process the request due to an internal error"
+  InvalidRequestError:
+    description: "Failed to process the request due to invalid request"
+  ResourceNotFound:
+    description: "The resource was not found"
+  UnauthorisedError:
+    description: "The token provided is unauthorised to carry out this operation"
