@@ -18,7 +18,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/assignments"
         500:
-          $ref: '#/responses/InternalError'
+          $ref: '#/components/responses/InternalError'
   /assignments/{assignment}:
     get:
       summary: "Retrieve figures for that assignment, how many hours up or down"
@@ -37,7 +37,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/assignment"
         500:
-          $ref: '#/responses/InternalError'
+          $ref: '#/components/responses/InternalError'
   /clock-in:
     post:
       summary: "Creates/Updates todays timesheet"
@@ -50,11 +50,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/time-sheet"
         400:
-          $ref: '#/responses/InvalidRequestError'
+          $ref: '#/components/responses/InvalidRequestError'
         409:
-          $ref: '#/responses/ConflictError'
+          $ref: '#/components/responses/ConflictError'
         500:
-          $ref: '#/responses/InternalError'
+          $ref: '#/components/responses/InternalError'
   /clock-out:
     post:
       summary: "Updates todays timesheet"
@@ -66,13 +66,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/time-sheet"
         400:
-          $ref: '#/responses/InvalidRequestError'
+          $ref: '#/components/responses/InvalidRequestError'
         404:
-          $ref: '#/responses/ResourceNotFound'
+          $ref: '#/components/responses/ResourceNotFound'
         409:
-          $ref: '#/responses/ConflictError'
+          $ref: '#/components/responses/ConflictError'
         500:
-          $ref: '#/responses/InternalError'
+          $ref: '#/components/responses/InternalError'
   /years:
     get:
       summary: "Retrieves a list of all years that have timesheet records"
@@ -84,7 +84,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/years"
         500:
-          $ref: '#/responses/InternalError'
+          $ref: '#/components/responses/InternalError'
   /years/{year}:
     get:
       summary: "Retrieve figures for that year, how many hours up or down"
@@ -103,9 +103,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/year-statistics"
         404:
-          $ref: '#/responses/ResourceNotFound'
+          $ref: '#/components/responses/ResourceNotFound'
         500:
-          $ref: '#/responses/InternalError'
+          $ref: '#/components/responses/InternalError'
   /years/{year}/months:
     get:
       summary: "Retrieves a list of all months for a particular year that have timesheet records"
@@ -124,9 +124,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/months"
         404:
-          $ref: '#/responses/ResourceNotFound'
+          $ref: '#/components/responses/ResourceNotFound'
         500:
-          $ref: '#/responses/InternalError'
+          $ref: '#/components/responses/InternalError'
   /years/{year}/months/{month}:
     get:
       summary: "Retrieve figures for that year, how many hours up or down"
@@ -153,9 +153,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/month-statistics"
         404:
-          $ref: '#/responses/ResourceNotFound'
+          $ref: '#/components/responses/ResourceNotFound'
         500:
-          $ref: '#/responses/InternalError'
+          $ref: '#/components/responses/InternalError'
   /years/{year}/months/{month}/days:
     get:
       summary: "Retrieves a list of all days for a particular month of a year that have timesheet records"
@@ -182,9 +182,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/days"
         404:
-          $ref: '#/responses/ResourceNotFound'
+          $ref: '#/components/responses/ResourceNotFound'
         500:
-          $ref: '#/responses/InternalError'
+          $ref: '#/components/responses/InternalError'
   /years/{year}/months/{month}/days/{day}:
     get:
       summary: "Retrieves the timesheet for that particular day"
@@ -219,9 +219,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/time-sheet"
         404:
-          $ref: '#/responses/ResourceNotFound'
+          $ref: '#/components/responses/ResourceNotFound'
         500:
-          $ref: '#/responses/InternalError'
+          $ref: '#/components/responses/InternalError'
   /years/{year}/months/{month}/days/{day}/assignment/{assignment}:
     post:
       summary: "Creates a timsheet for that day of the year with an empty time object"
@@ -269,9 +269,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/time-sheet-without-time-object'
         409:
-          $ref: '#/responses/ConflictError'
+          $ref: '#/components/responses/ConflictError'
         500:
-          $ref: '#/responses/InternalError'
+          $ref: '#/components/responses/InternalError'
 components:
   schemas:
     assignments:
@@ -476,16 +476,16 @@ components:
             type: integer
             minimum: 1
             maximum: 31
-responses:
-  ConflictError:
-    description: "Failed to process the request due to a conflict"
-  ForbiddenError:
-    description: "The request is forbidden"
-  InternalError:
-    description: "Failed to process the request due to an internal error"
-  InvalidRequestError:
-    description: "Failed to process the request due to invalid request"
-  ResourceNotFound:
-    description: "The resource was not found"
-  UnauthorisedError:
-    description: "The token provided is unauthorised to carry out this operation"
+  responses:
+    ConflictError:
+      description: "Failed to process the request due to a conflict"
+    ForbiddenError:
+      description: "The request is forbidden"
+    InternalError:
+      description: "Failed to process the request due to an internal error"
+    InvalidRequestError:
+      description: "Failed to process the request due to invalid request"
+    ResourceNotFound:
+      description: "The resource was not found"
+    UnauthorisedError:
+      description: "The token provided is unauthorised to carry out this operation"
