@@ -7,6 +7,7 @@ import (
 	"github.com/ONSdigital/go-ns/server"
 	"github.com/gorilla/mux"
 	"github.com/time-sheet/config"
+	"github.com/time-sheet/service/handlers"
 	"github.com/time-sheet/store"
 )
 
@@ -48,9 +49,10 @@ func Routes(cfg config.Configuration, router *mux.Router, dataStore store.DataSt
 		Router:    router,
 	}
 
+	timeSheetStore := handlers.Store{Storer: api.DataStore.Backend}
 	// TODO api.Router.HandleFunc("/assignments", GetAssignments).Methods("GET")
 	// TODO api.Router.HandleFunc("/assignments/{assignment}", GetAssignment).Methods("GET")
-	// TODO api.Router.HandleFunc("/clock-in", PostStart).Methods("POST")
+	api.Router.HandleFunc("/clock-in", timeSheetStore.PostStart).Methods("POST")
 	// TODO api.Router.HandleFunc("/clock-out", PostEnd).Methods("POST")
 	// TODO api.Router.HandleFunc("/years", GetYears).Methods("GET")
 	// TODO api.Router.HandleFunc("/years/{year}", GetYear).Methods("GET")
