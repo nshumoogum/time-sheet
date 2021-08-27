@@ -16,11 +16,11 @@ A tracking service for when one clocks in or out
 | GRACEFUL_SHUTDOWN_TIMEOUT | 5s              | The graceful shutdown timeout in seconds
 | MONGODB_BIND_ADDR         | localhost:27017 | The MongoDB bind address
 | MONGODB_DATABASE          | timesheets      | The MongoDB dataset database
-| MONGODB_COLLECTION        | timesheets      | MongoDB collection [[1]](#NOTES-1)
+| MONGODB_COLLECTION        | timesheets      | MongoDB collection [[1]](#notes_1)
 
 **Notes:**
 
-1. <a name="Notes 1">For more info, see the [kafka TLS examples documentation](https://github.com/ONSdigital/dp-kafka/tree/main/examples#tls)</a>
+1. <a name="notes_1">For more info, see the [kafka TLS examples documentation](https://github.com/ONSdigital/dp-kafka/tree/main/examples#tls)</a>
 
 ### Contributing
 
